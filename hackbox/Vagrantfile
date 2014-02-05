@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+
+ ## unsere Hack Box
+  config.vm.define "hackbox" do |hackbox|
+    # Box:
+    hackbox.vm.box     = "redtag-debian-71-x64-vbox4210"
+    hackbox.vm.box_url = "http://files.red-tag.de/vagrant/debian-71-x64-vbox4210.box"
+
+
+    # Network:
+    hackbox.ssh.forward_agent = true
+    hackbox.vm.network :private_network, ip: "172.21.77.100"
+
+    # Virtualbox settings:
+    hackbox.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "phpughalle-hackbox"]
+    end
+
+    # Install r10k using the shell provisioner and download the Puppet modules
+    config.vm.provision :shell, :path => "bootstrap.sh"
+
+    # Provisioning (Puppet Apply):
+    hackbox.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.facter = [
+        ['fqdn', 'phpughalle-hackbox.local'],
+      ]
+      puppet.options = [
+        "--verbose",
+        "--modulepath=/vagrant/modules:/vagrant/local_modules"]
+    end
+  end
+
+end
+
