@@ -1,6 +1,6 @@
 class hackbox::phptools {
 
-    package { [
+  package { [
     'php5',
     'php5-curl',
     'php5-intl',
@@ -12,7 +12,7 @@ class hackbox::phptools {
     'php5-imagick',
     'apache2-mpm-prefork',
     'libapache2-mod-php5',
-   ]: ensure => latest }
+  ]: ensure => latest }
 
   file { '/home/vagrant/bin':
     ensure => directory,
