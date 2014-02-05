@@ -4,33 +4,70 @@
 Vagrant.configure("2") do |config|
 
 
- ## unsere Hack Box
-  config.vm.define "hackbox" do |hackbox|
+ ## unsere Hack Box mit PHP 5.4:
+  config.vm.define "hackbox54" do |hackbox54|
     # Box:
-    hackbox.vm.box     = "redtag-debian-71-x64-vbox4210"
-    hackbox.vm.box_url = "http://files.red-tag.de/vagrant/debian-71-x64-vbox4210.box"
+    hackbox54.vm.box     = "redtag-debian-71-x64-vbox4210"
+    hackbox54.vm.box_url = "http://files.red-tag.de/vagrant/debian-71-x64-vbox4210.box"
 
 
     # Network:
-    hackbox.ssh.forward_agent = true
-    hackbox.vm.network :private_network, ip: "172.21.77.100"
+    hackbox54.ssh.forward_agent = true
+    hackbox54.vm.network :private_network, ip: "172.21.77.100"
 
     # Virtualbox settings:
-    hackbox.vm.provider :virtualbox do |v|
+    hackbox54.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 1024]
-      v.customize ["modifyvm", :id, "--name", "phpughalle-hackbox"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "phpughalle-hackbox54"]
     end
 
     # Install r10k using the shell provisioner and download the Puppet modules
     config.vm.provision :shell, :path => "bootstrap.sh"
 
     # Provisioning (Puppet Apply):
-    hackbox.vm.provision :puppet do |puppet|
+    hackbox54.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
       puppet.manifest_file  = "site.pp"
       puppet.facter = [
-        ['fqdn', 'phpughalle-hackbox.local'],
+        ['fqdn', 'phpughalle-hackbox54.local'],
+        ['phpversion', '54'],
+      ]
+      puppet.options = [
+        "--verbose",
+        "--modulepath=/vagrant/modules:/vagrant/local_modules"]
+    end
+  end
+
+
+ ## unsere Hack Box mit PHP 5.5:
+  config.vm.define "hackbox55" do |hackbox55|
+    # Box:
+    hackbox55.vm.box     = "redtag-debian-71-x64-vbox4210"
+    hackbox55.vm.box_url = "http://files.red-tag.de/vagrant/debian-71-x64-vbox4210.box"
+
+
+    # Network:
+    hackbox55.ssh.forward_agent = true
+    hackbox55.vm.network :private_network, ip: "172.21.77.101"
+
+    # Virtualbox settings:
+    hackbox55.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "phpughalle-hackbox55"]
+    end
+
+    # Install r10k using the shell provisioner and download the Puppet modules
+    config.vm.provision :shell, :path => "bootstrap.sh"
+
+    # Provisioning (Puppet Apply):
+    hackbox55.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "site.pp"
+      puppet.facter = [
+        ['fqdn', 'phpughalle-hackbox55.local'],
+        ['phpversion', '55'],
       ]
       puppet.options = [
         "--verbose",
