@@ -5,7 +5,8 @@ class hackbox_base {
     path => ['/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/', '/home/vagrant/bin']
   }
 
-  class { 'apt': }
+  class { 'stdlib': }
+  class { 'apt':    }
 
   if $::phpversion == '55' {
     apt::source { "dotdeb-common":
@@ -31,6 +32,6 @@ class hackbox_base {
 }
 
 class hackbox inherits hackbox_base {
-  class { 'hackbox::env':      } ->
-  class { 'hackbox::phptools': }
+  class { 'hackbox::env':          } ->
+  class { 'hackbox::phptools':     } 
 }

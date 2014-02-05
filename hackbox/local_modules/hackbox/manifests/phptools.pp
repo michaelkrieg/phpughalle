@@ -1,9 +1,7 @@
 class hackbox::phptools {
 
     package { [
-    'apache2',
     'php5',
-    'libapache2-mod-php5',
     'php5-curl',
     'php5-intl',
     'php5-xdebug',
@@ -12,6 +10,8 @@ class hackbox::phptools {
     'php5-mysql',
     'imagemagick',
     'php5-imagick',
+    'apache2-mpm-prefork',
+    'libapache2-mod-php5',
    ]: ensure => latest }
 
   file { '/home/vagrant/bin':
@@ -39,6 +39,7 @@ class hackbox::phptools {
     ensure  => present,
     path    => '/var/www/phpinfo.php',
     content => "<?php \nphpinfo(); \n",
+    require => Package['apache2-mpm-prefork'],
   }
   
 }
