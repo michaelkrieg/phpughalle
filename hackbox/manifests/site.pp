@@ -18,5 +18,9 @@ node default {
     host_aliases => [ 'phpughalle-hackbox', 'hackbox' ],
     notify       => Exec['update_hostname'],
   }
+
+  package { ['git', 'ant', 'acl', 'curl', 'sudo', 'screen']:
+    ensure => latest,
+  }
 }
 
