@@ -10,7 +10,7 @@ und warten :-)
 
 Der Zugriff erfolgt dann mittels
 
-    vagrant ssh
+    vagrant ssh [hackbox54 | hackbox55]
     ## dann optional:
     sudo su -
 
