@@ -1,0 +1,9 @@
+---
+apt::always_apt_update: true
+apt::purge_sources_list: false
+apt::purge_sources_list_d: false
+apt::purge_preferences_d: false
+
+mysql::server::root_password: changeme
+
+
