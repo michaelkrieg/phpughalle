@@ -22,3 +22,10 @@ PHP Info
 - 5.4: http://172.21.77.100/phpinfo.php  
 - 5.5: http://172.21.77.101/phpinfo.php  
 
+MySQL
+-----
+
+In beiden VMs ist MySQL 5.5 vorinstalliert. Das MySQL root Passwort lautet 'changeme'.  
+Es gibt auch eine leere Datenbank "hackbox" - Nutzername hier "phpug" und Passwort ebenfalls "changeme".
+
+
