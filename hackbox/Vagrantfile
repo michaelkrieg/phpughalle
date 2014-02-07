@@ -36,6 +36,7 @@ Vagrant.configure("2") do |config|
       puppet.options = [
         "--verbose",
         "--modulepath=/vagrant/modules:/vagrant/local_modules"]
+      puppet.hiera_config_path = "hiera.yaml"
     end
   end
 
@@ -72,6 +73,7 @@ Vagrant.configure("2") do |config|
       puppet.options = [
         "--verbose",
         "--modulepath=/vagrant/modules:/vagrant/local_modules"]
+      puppet.hiera_config_path = "hiera.yaml"
     end
   end
 
