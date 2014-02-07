@@ -34,5 +34,6 @@ class hackbox_base {
 class hackbox inherits hackbox_base {
   class { 'hackbox::env':          } ->
   class { 'hackbox::phptools':     } ->
+  class { 'hackbox::mysql':        } ->
   class { 'hackbox::services':     }
 }
