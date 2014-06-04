@@ -24,7 +24,7 @@ class hackbox::env {
     notify       => Exec['update_hostname'],
   }
 
-  package { ['git', 'ant', 'acl', 'curl', 'sudo', 'screen', 'vim']:
+  package { ['git', 'ant', 'acl', 'curl', 'sudo', 'screen', 'vim', 'zip']:
     ensure => latest,
   }
 
