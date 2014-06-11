@@ -12,6 +12,7 @@ class hackbox::phptools {
     'php5-imagick',
     'apache2-mpm-prefork',
     'libapache2-mod-php5',
+    'phpmyadmin',
   ]: ensure => latest }
 
   file { '/home/vagrant/bin':
@@ -41,6 +42,21 @@ class hackbox::phptools {
     content => "<?php \nphpinfo(); \n",
     require => Package['apache2-mpm-prefork'],
   }
-  
+
+  exec {'apache2-reload':
+    command => '/usr/sbin/service apache2 reload',
+    require => Package['apache2-mpm-prefork'],
+  }
+
+  file { '/etc/apache2/conf.d/phpmyadmin.conf':
+    ensure  => 'link',
+    group   => '0',
+    mode    => '777',
+    owner   => '0',
+    target  => '/etc/phpmyadmin/apache.conf',
+    require => Package['phpmyadmin'],
+    notify  => Exec['apache2-reload'],
+  }
+
 }
 

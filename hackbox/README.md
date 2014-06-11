@@ -22,6 +22,12 @@ PHP Info
 - 5.4: http://172.21.77.100/phpinfo.php  
 - 5.5: http://172.21.77.101/phpinfo.php  
 
+PHPMyAdmin
+----------
+
+- 5.4: http://172.21.77.100/phpmyadmin
+- 5.5: http://172.21.77.101/phpmyadmin
+
 MySQL
 -----
 
